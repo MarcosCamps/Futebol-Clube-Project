@@ -8,9 +8,11 @@ import { EMAIL_REGEX } from '../helpers/emailRegex';
 require('express-async-errors');
 
 const errMessage = 'Incorrect email or password';
+const emailErr = 'All fields must be filled';
 
 const validateBody = async (body: any) => {
   const { email, password, next } = body;
+  if (!email) return next(new ThrowError(400, emailErr));
   if (!EMAIL_REGEX.test(email) || password.length < 6) {
     return next(new ThrowError(401, errMessage));
   }
