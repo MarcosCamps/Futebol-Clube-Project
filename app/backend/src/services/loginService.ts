@@ -36,7 +36,7 @@ export default class loginService implements IServiceM {
       raw: true,
     });
     if (!userExists) return next(new ThrowError(401, errMessage));
-    const passwordExistis = crypt.compare(password, userExists.password);
+    const passwordExistis = crypt.compareSync(password, userExists.password);
     if (!passwordExistis) return next(new ThrowError(401, errMessage));
     return userExists;
   };
