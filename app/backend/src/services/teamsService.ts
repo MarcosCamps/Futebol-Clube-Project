@@ -7,4 +7,12 @@ const getTeams = async (): Promise<any> => {
   return teams;
 };
 
-export default getTeams;
+const getTeamById = async (id: number): Promise<any> => {
+  const teamById = await teamsModel.findOne({
+    where: { id },
+    raw: true,
+  });
+  return teamById;
+};
+
+export { getTeams, getTeamById };
