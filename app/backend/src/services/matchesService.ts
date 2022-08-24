@@ -26,4 +26,10 @@ const createMatch = async (match: iMatches): Promise<iMatches> => {
   return data;
 };
 
-export { getListOfMatches, createMatch };
+const finishMatch = async (id: number) => {
+  await matchesModel.update({
+    inProgress: false,
+  }, { where: { id } });
+  return true;
+};
+export { getListOfMatches, createMatch, finishMatch };
