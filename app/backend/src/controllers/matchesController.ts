@@ -10,7 +10,7 @@ const listOfMatches = async (_req: Request, res: Response, _next: NextFunction) 
 
 const addMatch = async (req: Request, res: Response, next: NextFunction) => {
   await validateToken;
-  validateTeams(req.body, next);
+  await validateTeams(req.body, next);
   const newMatch = await createMatch(req.body);
   return res.status(201).json(newMatch);
 };
