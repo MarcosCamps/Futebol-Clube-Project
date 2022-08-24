@@ -20,4 +20,10 @@ const getListOfMatches = async (): Promise<iMatches[]> => {
   return teams;
 };
 
-export default getListOfMatches;
+const createMatch = async (match: iMatches): Promise<iMatches> => {
+  match.inProgress = true;
+  const data = await matchesModel.create(match);
+  return data;
+};
+
+export { getListOfMatches, createMatch };
