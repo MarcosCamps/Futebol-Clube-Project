@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { getListOfMatches, createMatch, finishMatch,
-  validateTeams } from '../services/matchesService';
+  validateTeams, updateMatch } from '../services/matchesService';
 
 const listOfMatches = async (_req: Request, res: Response, _next: NextFunction) => {
   const getAllTeams = await getListOfMatches();
@@ -19,4 +19,11 @@ const matchFinished = async (req: Request, res: Response, _next: NextFunction) =
   return res.status(200).json({ message: 'Finished' });
 };
 
-export { listOfMatches, addMatch, matchFinished };
+const updatingMatch = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { homeTeamGoals, awayTeamGoals } = req.body;
+  await updateMatch(+id, homeTeamGoals, awayTeamGoals);
+  return res.status(200).json({ message: 'Updated' });
+};
+
+export { listOfMatches, addMatch, matchFinished, updatingMatch };

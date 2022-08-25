@@ -47,4 +47,11 @@ const finishMatch = async (id: number) => {
   return true;
 };
 
-export { getListOfMatches, createMatch, finishMatch, validateTeams };
+const updateMatch = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+  await matchesModel.update({
+    homeTeamGoals,
+    awayTeamGoals,
+  }, { where: { id } });
+};
+
+export { getListOfMatches, createMatch, finishMatch, validateTeams, updateMatch };
