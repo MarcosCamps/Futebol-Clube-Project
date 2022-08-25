@@ -31,8 +31,6 @@ const validateTeams = async (match: iMatches, next: NextFunction) => {
   if (homeTeam === awayTeam) return next(new ThrowError(401, notPossible));
   const homeTeamExists = await getTeamById(homeTeam);
   const awayTeamExistis = await getTeamById(awayTeam);
-  // const homeTeamExists = await teamsModel.findOne({ where: { id: homeTeam } });
-  // const awayTeamExistis = await teamsModel.findOne({ where: { id: awayTeam } });
   if (!homeTeamExists || !awayTeamExistis) return next(new ThrowError(404, teamWithoutId));
 };
 
